@@ -5,24 +5,15 @@
   "taxpaid" : 5000,
   "taxdue" : 7000,
   "taxpercent" : 12,
-  "fullname" : "John",
-  "status" : "not paid off"
-}, {
-  "id" : 1,
-  "totalincome" : 100000,
-  "totaltax" : 12000,
-  "taxpaid" : 5000,
-  "taxdue" : 7000,
-  "taxpercent" : 12,
   "fullname" : "John Doe",
   "status" : "not paid off"
 }, {
   "id" : 2,
-  "totalincome" : 85000,
-  "totaltax" : 8500,
-  "taxpaid" : 8500,
+  "totalincome" : 90000,
+  "totaltax" : 9900,
+  "taxpaid" : 9900,
   "taxdue" : 0,
-  "taxpercent" : 10,
+  "taxpercent" : 11,
   "fullname" : "Jane Smith",
   "status" : "paid"
 }, {

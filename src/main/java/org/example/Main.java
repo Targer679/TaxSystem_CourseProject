@@ -1,5 +1,4 @@
 package org.example;
-
 import java.util.*;
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
-    public static void saveToJSONFile(String filename, ArrayList<Taxpayer> taxpayers) {
+    public static void save(String filename, ArrayList<Taxpayer> taxpayers) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             new File("src/main/resources").mkdirs(); // Ensure directory exists
@@ -36,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
             e.printStackTrace();
         }
     }
-     public static ArrayList<Taxpayer> readJSON(String filename){
+     public static ArrayList<Taxpayer> read(String filename){
 
          ObjectMapper objectMapper = new ObjectMapper();
          ArrayList<Taxpayer> taxpayers = new ArrayList<>();
@@ -64,30 +63,71 @@ import com.fasterxml.jackson.databind.ObjectMapper;
          System.out.println("Taxpayer Status: " + status);
 
      }
+     public static void delete(String filename, int idToDelete) {
+         ObjectMapper objectMapper = new ObjectMapper();
+         File file = new File("src/main/resources/" + filename);
+
+         try {
+             // Step 1: Read existing list
+             ArrayList<Taxpayer> taxpayers = new ArrayList<>(Arrays.asList(
+                     objectMapper.readValue(file, Taxpayer[].class)
+             ));
+
+             // Step 2: Remove taxpayer by ID
+             taxpayers.removeIf(t -> t.id == idToDelete);
+
+             // Step 3: Save updated list
+             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, taxpayers);
+             System.out.println("Taxpayer with ID " + idToDelete + " removed successfully.");
+
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
+     public static void update(String filename, int idToUpdate, Taxpayer updatedTaxpayer) {
+         ObjectMapper objectMapper = new ObjectMapper();
+         File file = new File("src/main/resources/" + filename);
+
+         try {
+             // Step 1: Read existing taxpayers
+             ArrayList<Taxpayer> taxpayers = new ArrayList<>(Arrays.asList(
+                     objectMapper.readValue(file, Taxpayer[].class)
+             ));
+
+             // Step 2: Find and update taxpayer by ID
+             boolean found = false;
+             for (int i = 0; i < taxpayers.size(); i++) {
+                 if (taxpayers.get(i).id == idToUpdate) {
+                     taxpayers.set(i, updatedTaxpayer);
+                     found = true;
+                     break;
+                 }
+             }
+
+             if (!found) {
+                 System.out.println("Taxpayer with ID " + idToUpdate + " not found.");
+                 return;
+             }
+
+             // Step 3: Save updated list
+             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, taxpayers);
+             System.out.println("Taxpayer with ID " + idToUpdate + " updated successfully.");
+
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
 
  }
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Taxpayer> taxpayers = Taxpayer.readJSON("taxpayers.json");
-        taxpayers.add(new Taxpayer(1, "John Doe", 100000, 12, 12000, 5000, 7000, "not paid off"));
-        taxpayers.add(new Taxpayer(2, "Jane Smith", 85000, 10, 8500, 8500, 0, "paid"));
-        taxpayers.add(new Taxpayer(3, "Carlos Ruiz", 120000, 15, 18000, 10000, 8000, "not paid off"));
-        taxpayers.add(new Taxpayer(4, "Mei Lin", 95000, 12, 11400, 11400, 0, "paid"));
-        taxpayers.add(new Taxpayer(5, "Amara Patel", 67000, 9, 6030, 3000, 3030, "not paid off"));
-        taxpayers.add(new Taxpayer(6, "Liam O'Connor", 72000, 11, 7920, 7920, 0, "paid"));
-        taxpayers.add(new Taxpayer(7, "Fatima Zahra", 134000, 16, 21440, 18000, 3440, "not paid off"));
-        taxpayers.add(new Taxpayer(8, "Ethan Park", 58000, 8, 4640, 4640, 0, "paid"));
-        taxpayers.add(new Taxpayer(9, "Sofia Rossi", 91000, 10, 9100, 6000, 3100, "not paid off"));
-        taxpayers.add(new Taxpayer(10, "Tariq Al-Fulan", 105000, 13, 13650, 13000, 650, "not paid off"));
-
-
-        Taxpayer.saveToJSONFile("taxpayers.json", taxpayers);
-        for (Taxpayer s : taxpayers) {
-            s.display();
-
-        }
-
+        ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
+        Taxpayer updated = new Taxpayer(
+                2, "Jane Smith", 90000, 11, 9900, 9900, 0, "paid"
+        );
+        Taxpayer.save("taxpayers.json", taxpayers);
+        Taxpayer.update("taxpayers.json", 2, updated );
 
     }
 }
