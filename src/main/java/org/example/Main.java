@@ -11,16 +11,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
     public Taxpayer() {} // Jackson needs this too
 
-    public Taxpayer(int id, String fullname, int totalincome, int taxpercent, int totaltax, int taxpaid, int taxdue, String status) {
-        this.id = id;
-        this.fullname = fullname;
-        this.totalincome = totalincome;
-        this.taxpercent = taxpercent;
-        this.totaltax = totaltax;
-        this.taxpaid = taxpaid;
-        this.taxdue = taxdue;
-        this.status = status;
-    }
+     public Taxpayer(int id, String fullname, int totalincome, int taxpercent, int taxpaid) {
+         this.id = id;
+         this.fullname = fullname;
+         this.totalincome = totalincome;
+         this.taxpercent = taxpercent;
+         this.totaltax = (taxpercent * totalincome) / 100;
+         this.taxpaid = taxpaid;
+         this.taxdue = this.totaltax - this.taxpaid;
+
+         if (this.taxdue == 0) {
+             this.status = "PAID";
+         } else if (this.taxdue > 0) {
+             this.status = "PARTIALLY PAID";
+         } else {
+             this.status = "OVERPAID";
+         }
+     }
 
 
 
@@ -55,11 +62,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
      void display(){
         System.out.println("Taxpayer ID: " + id);
         System.out.println("Taxpayer Name: " + fullname);
-        System.out.println("Taxpayer Total Income: " + totalincome);
-         System.out.println("Taxpayer TaxPercent: " + taxpercent);
-        System.out.println("Taxpayer Total Tax: " + totaltax);
-        System.out.println("Taxpayer Taxpaid: " + taxpaid);
-        System.out.println("Taxpayer Taxdue: " + taxdue);
+        System.out.println("Taxpayer yearly Total Income: " + totalincome + "$");
+         System.out.println("Taxpayer TaxPercent: " + taxpercent + "%");
+        System.out.println("Taxpayer Total Tax: " + totaltax + "$");
+        System.out.println("Taxpayer Taxpaid: " + taxpaid + "$");
+        System.out.println("Taxpayer Taxdue: " + taxdue + "$");
          System.out.println("Taxpayer Status: " + status);
 
      }
@@ -123,12 +130,68 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
-        Taxpayer updated = new Taxpayer(
-                2, "Jane Smith", 90000, 11, 9900, 9900, 0, "paid"
-        );
-        Taxpayer.save("taxpayers.json", taxpayers);
-        Taxpayer.update("taxpayers.json", 2, updated );
+        Scanner input = new Scanner(System.in);
+        System.out.println("THIS IS IRS TAX MANAGEMENT SYSTEM");
+        System.out.println("ARE YOU AN ADMIN?\nYES/NO");
+        String ans = input.nextLine();
 
+        if (ans.equalsIgnoreCase("yes")) {
+            System.out.println("ENTER A PASSWORD:");
+            String password = input.nextLine();
+            if (password.equals("4815162342")) {
+                System.out.println("YOU ARE SUCCESSFULLY LOGGED IN AS AN ADMIN");
+                System.out.println("WANT DO YOU WANT TO DO?\nADD A TAXPAYER - 1\nGET AN INFORMAION OF A TAXPAYER - 2\nUPDATE AN INFORMATION OF A TAXPAYER - 3\nREMOVE A TAXPAYER - 4");
+                int ch = input.nextInt();
+                if (ch == 1) {
+                    System.out.println("ENTER ID:");
+                    int id = input.nextInt();
+                    input.nextLine();
+                    System.out.println("ENTER FULL NAME:");
+                    String name = input.nextLine();
+                    System.out.println("ENTER TOTAL YEARLY INCOME:");
+                    int tin = input.nextInt();
+                    System.out.println("ENTER TAX  PERCENT:");
+                    int taxprc = input.nextInt();
+                    System.out.println("ENTER PAID AMOUNT OF TAX:");
+                    int txpd = input.nextInt();
+                    taxpayers.add(new Taxpayer(id, name, tin, taxprc, txpd));
+                    Taxpayer.save("taxpayers.json", taxpayers);
+                }
+                if (ch == 2) {
+                    Taxpayer.read("taxpayers.json");
+                    System.out.println("ENTER ID:");
+                    int id = input.nextInt();
+                    for (Taxpayer taxpayer : taxpayers) {
+                        if (taxpayer.id == id) {
+                            taxpayer.display();
+                        }
+                    }
+
+                }
+                if (ch == 3) {
+                    System.out.println("ENTER ID OF A TAXPAYER WHOSE INFO YOU WANT TO CHANGE:");
+                    int id = input.nextInt();
+                    Taxpayer.read("taxpayers.json");
+                    for (Taxpayer taxpayer : taxpayers) {
+                        if (taxpayer.id == id) {
+                            taxpayer.display();
+                        }
+                        System.out.println("WHAT DO YOU WANT TO CHANGE?");
+                        System.out.println("ID - 1\n NAME - 2\n TOTAL YEARLY INCOME - 3\n TAX PERCENTAGE - 4\n SUBMIT TAXES -5");
+                        int vv = input.nextInt();
+                    }
+
+
+                } else if (!password.equals("4815162342")) {
+                    System.out.println("WRONG PASSWORD");
+                }
+            }
+            if (ans.equalsIgnoreCase("no")) {
+                System.out.println("YOU ARE IN A USER MODE ONLY VIEWING DATA AND TAX SUBMISSION IS ALLOWED");
+            }
+
+
+        }
     }
 }
 

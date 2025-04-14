@@ -1,91 +1,10 @@
 [ {
   "id" : 1,
-  "totalincome" : 100000,
-  "totaltax" : 12000,
-  "taxpaid" : 5000,
-  "taxdue" : 7000,
-  "taxpercent" : 12,
-  "fullname" : "John Doe",
-  "status" : "not paid off"
-}, {
-  "id" : 2,
-  "totalincome" : 90000,
-  "totaltax" : 9900,
-  "taxpaid" : 9900,
-  "taxdue" : 0,
-  "taxpercent" : 11,
-  "fullname" : "Jane Smith",
-  "status" : "paid"
-}, {
-  "id" : 3,
-  "totalincome" : 120000,
-  "totaltax" : 18000,
-  "taxpaid" : 10000,
-  "taxdue" : 8000,
-  "taxpercent" : 15,
-  "fullname" : "Carlos Ruiz",
-  "status" : "not paid off"
-}, {
-  "id" : 4,
-  "totalincome" : 95000,
-  "totaltax" : 11400,
-  "taxpaid" : 11400,
-  "taxdue" : 0,
-  "taxpercent" : 12,
-  "fullname" : "Mei Lin",
-  "status" : "paid"
-}, {
-  "id" : 5,
   "totalincome" : 67000,
-  "totaltax" : 6030,
-  "taxpaid" : 3000,
-  "taxdue" : 3030,
-  "taxpercent" : 9,
-  "fullname" : "Amara Patel",
-  "status" : "not paid off"
-}, {
-  "id" : 6,
-  "totalincome" : 72000,
-  "totaltax" : 7920,
-  "taxpaid" : 7920,
-  "taxdue" : 0,
-  "taxpercent" : 11,
-  "fullname" : "Liam O'Connor",
-  "status" : "paid"
-}, {
-  "id" : 7,
-  "totalincome" : 134000,
-  "totaltax" : 21440,
-  "taxpaid" : 18000,
-  "taxdue" : 3440,
-  "taxpercent" : 16,
-  "fullname" : "Fatima Zahra",
-  "status" : "not paid off"
-}, {
-  "id" : 8,
-  "totalincome" : 58000,
-  "totaltax" : 4640,
-  "taxpaid" : 4640,
-  "taxdue" : 0,
-  "taxpercent" : 8,
-  "fullname" : "Ethan Park",
-  "status" : "paid"
-}, {
-  "id" : 9,
-  "totalincome" : 91000,
-  "totaltax" : 9100,
-  "taxpaid" : 6000,
-  "taxdue" : 3100,
-  "taxpercent" : 10,
-  "fullname" : "Sofia Rossi",
-  "status" : "not paid off"
-}, {
-  "id" : 10,
-  "totalincome" : 105000,
-  "totaltax" : 13650,
-  "taxpaid" : 13000,
-  "taxdue" : 650,
-  "taxpercent" : 13,
-  "fullname" : "Tariq Al-Fulan",
-  "status" : "not paid off"
+  "totaltax" : 23450,
+  "taxpaid" : 5555,
+  "taxdue" : 17895,
+  "taxpercent" : 35,
+  "fullname" : "JOHN MARSTON",
+  "status" : "PARTIALLY PAID"
 } ]
