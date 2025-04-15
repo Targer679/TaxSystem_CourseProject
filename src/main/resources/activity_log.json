@@ -1,0 +1,109 @@
+[ {
+  "timestamp" : "2025-04-15 23:33:47",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:33:53",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_ATTEMPT",
+  "details" : "Admin login attempted"
+}, {
+  "timestamp" : "2025-04-15 23:33:53",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:34:00",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_SUCCESS",
+  "details" : "Admin logged in successfully"
+}, {
+  "timestamp" : "2025-04-15 23:35:03",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_SAVE",
+  "details" : "Saving taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:35:03",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "TAXPAYER_ADDED",
+  "details" : "Added new taxpayer ID 4"
+}, {
+  "timestamp" : "2025-04-15 23:53:11",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:53:16",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_ATTEMPT",
+  "details" : "Admin login attempted"
+}, {
+  "timestamp" : "2025-04-15 23:53:16",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:53:21",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_SUCCESS",
+  "details" : "Admin logged in successfully"
+}, {
+  "timestamp" : "2025-04-15 23:54:13",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:54:16",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_ATTEMPT",
+  "details" : "Admin login attempted"
+}, {
+  "timestamp" : "2025-04-15 23:54:16",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-15 23:54:21",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_SUCCESS",
+  "details" : "Admin logged in successfully"
+}, {
+  "timestamp" : "2025-04-16 00:26:21",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-16 00:26:25",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_ATTEMPT",
+  "details" : "Admin login attempted"
+}, {
+  "timestamp" : "2025-04-16 00:26:25",
+  "userType" : "SYSTEM",
+  "userId" : -1,
+  "action" : "DATA_LOAD",
+  "details" : "Loading taxpayers data"
+}, {
+  "timestamp" : "2025-04-16 00:26:29",
+  "userType" : "ADMIN",
+  "userId" : -1,
+  "action" : "ADMIN_LOGIN_SUCCESS",
+  "details" : "Admin logged in successfully"
+} ]
