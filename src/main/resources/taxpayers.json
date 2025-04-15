@@ -1,10 +1,1 @@
-[ {
-  "id" : 1,
-  "totalincome" : 67000,
-  "totaltax" : 23450,
-  "taxpaid" : 5555,
-  "taxdue" : 17895,
-  "taxpercent" : 35,
-  "fullname" : "JOHN MARSTON",
-  "status" : "PARTIALLY PAID"
-} ]
+[ ]
