@@ -114,7 +114,7 @@ class Taxpayer {
         logActivity("SYSTEM", -1, "DATA_SAVE", "Saving taxpayers data");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            new File("src/main/resources").mkdirs(); // Ensure directory exists
+            new File("src/main/resources").mkdirs(); 
             objectMapper.writerWithDefaultPrettyPrinter()
                     .writeValue(new File("src/main/resources/" + filename), taxpayers);
             System.out.println("JSON file created successfully.");
