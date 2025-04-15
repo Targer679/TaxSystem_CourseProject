@@ -24,7 +24,7 @@ Graceful Error Handling	✅ File I/O
 
 3. Project Requirements :
 
-1. CRUD Operations
+  1. CRUD Operations:
 
 Create: adminMode() → Option 1 (Add taxpayer with auto-ID generation)
 
@@ -98,6 +98,7 @@ Includes basic authorization
 Has different available function for admin and user
 
 10. Project supports Data Export and Import
+
     provides efficient data export and import using .json files
 
 
