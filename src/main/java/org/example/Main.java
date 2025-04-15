@@ -23,10 +23,13 @@ class Taxpayer {
 
         if (this.taxdue == 0) {
             this.status = "PAID";
-        } else if (this.taxdue > 0) {
+        } else if (this.taxdue > 0 && this.taxpaid > 0) {
             this.status = "PARTIALLY PAID";
-        } else {
+        } else if (this.taxdue < 0) {
             this.status = "OVERPAID";
+        }
+        else if(this.taxpaid == 0){
+            this.status = "NOT PAID";
         }
     }
 
@@ -128,7 +131,33 @@ class Taxpayer {
             e.printStackTrace();
         }
     }
+    public static void userMode(){
+        Scanner input = new Scanner(System.in);
+        ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
+        System.out.println("YOU ARE IN A USER MODE ONLY VIEWING DATA AND TAX SUBMISSION IS ALLOWED");
+        System.out.println("WHAT DO YOU WANT TO DO?\nVIEW MY PERSONAL INFO - 1\nSUBMIT MY TAXES - 2");
+        int choice = input.nextInt();
+        if (choice == 1) {
+            System.out.println("ENTER ID:");
+            int id = input.nextInt();
+            boolean found = false;
+            for (Taxpayer taxpayer : taxpayers) {
+                if (taxpayer.id == id) {
+                    taxpayer.display();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println("TAXPAYER NOT FOUND");
+            }
+        }
+        if(choice == 2){
 
+                    Taxpayer.submitTax();
+
+        }
+    }
     public static void adminMode() {
         Scanner input = new Scanner(System.in);
         ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
@@ -158,19 +187,28 @@ class Taxpayer {
                 int taxprc = input.nextInt();
                 System.out.println("ENTER PAID AMOUNT OF TAX:");
                 int txpd = input.nextInt();
-
-                taxpayers.add(new Taxpayer(newId, name, tin, taxprc, txpd));
+                Taxpayer t = new Taxpayer(newId, name, tin, taxprc, txpd);
+                taxpayers.add(t);
                 Taxpayer.save("taxpayers.json", taxpayers);
                 System.out.println("Taxpayer added successfully!");
+                System.out.println("Added Info:");
+                t.display();
+
             }
             if (ch == 2) {
                 Taxpayer.read("taxpayers.json");
                 System.out.println("ENTER ID:");
                 int id = input.nextInt();
+                boolean found = false;
                 for (Taxpayer taxpayer : taxpayers) {
                     if (taxpayer.id == id) {
                         taxpayer.display();
+                        found = true;
+                        break;
                     }
+                }
+                if (!found) {
+                    System.out.println("TAXPAYER NOT FOUND");
                 }
 
             }
@@ -202,10 +240,16 @@ class Taxpayer {
             if(ch == 4){
                 System.out.println("ENTER ID OF A TAXPAYER WHOSE INFORMATION YPU WANT TO DELETE:");
                 int id = input.nextInt();
+                boolean found = false;
                 for (Taxpayer taxpayer : taxpayers) {
                     if (taxpayer.id == id) {
-                       Taxpayer.delete("taxpayers.json", taxpayer.id);
+                        Taxpayer.delete("taxpayers.json", taxpayer.id);
+                        found = true;
+                        break;
                     }
+                }
+                if (!found) {
+                    System.out.println("TAXPAYER NOT FOUND");
                 }
             }
         }
@@ -315,11 +359,11 @@ class Taxpayer {
             System.out.println("TAXPAYER NOT FOUND");
         }
     }
-    public static void changeTax() {
+    public static void submitTax() {
         Scanner input = new Scanner(System.in);
         ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
 
-        System.out.println("ENTER ID OF A TAXPAYER WHOSE TAXES YOU WANT TO SUBMIT:");
+        System.out.println("ENTER YOUR ID:");
         int id = input.nextInt();
         input.nextLine(); // Consume leftover newline
 
@@ -330,10 +374,10 @@ class Taxpayer {
                 System.out.println("ORIGINAL INFORMATION:");
                 taxpayer.display();
 
-                System.out.println("ENTER UPDATED AMOUNT OF SUBMITTED USD:");
+                System.out.println("ENTER AMOUNT OF USD YOU WANT TO SUBMIT:");
                 int tax = input.nextInt();
 
-                Taxpayer updated = new Taxpayer(taxpayer.id, taxpayer.fullname, taxpayer.totalincome, taxpayer.taxpercent, tax);
+                Taxpayer updated = new Taxpayer(taxpayer.id, taxpayer.fullname, taxpayer.totalincome, taxpayer.taxpercent, taxpayer.taxpaid+tax);
 
                 Taxpayer.update("taxpayers.json", taxpayer.id, updated);
                 System.out.println("UPDATED INFORMATION:");
@@ -387,7 +431,39 @@ class Taxpayer {
             System.out.println("TAXPAYER NOT FOUND");
         }
     }
+    public static void changeTax() {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Taxpayer> taxpayers = Taxpayer.read("taxpayers.json");
 
+        System.out.println("ENTER ID OF A TAXPAYER WHOSE TAXES YOU WANT TO CHANGE:");
+        int id = input.nextInt();
+        input.nextLine(); // Consume leftover newline
+
+        boolean found = false;
+
+        for (Taxpayer taxpayer : taxpayers) {
+            if (taxpayer.id == id) {
+                System.out.println("ORIGINAL INFORMATION:");
+                taxpayer.display();
+
+                System.out.println("ENTER UPDATED AMOUNT OF SUBMITTED USD:");
+                int tax = input.nextInt();
+
+                Taxpayer updated = new Taxpayer(taxpayer.id, taxpayer.fullname, taxpayer.totalincome, taxpayer.taxpercent, tax);
+
+                Taxpayer.update("taxpayers.json", taxpayer.id, updated);
+                System.out.println("UPDATED INFORMATION:");
+                updated.display();
+                System.out.println("Taxpayer with ID " + taxpayer.id + " updated successfully.");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("TAXPAYER NOT FOUND");
+        }
+    }
 
 
 }
@@ -404,12 +480,9 @@ class Main {
         }
 
         if (ans.equalsIgnoreCase("no")) {
-            System.out.println("YOU ARE IN A USER MODE ONLY VIEWING DATA AND TAX SUBMISSION IS ALLOWED");
+            Taxpayer.userMode();
         }
 
 
     }
 }
-
-
-

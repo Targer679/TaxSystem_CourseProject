@@ -1,1 +1,28 @@
-[ ]
+[ {
+  "id" : 1,
+  "totalincome" : 60000,
+  "totaltax" : 15000,
+  "taxpaid" : 6000,
+  "taxdue" : 9000,
+  "taxpercent" : 25,
+  "fullname" : "Jon Jones",
+  "status" : "PARTIALLY PAID"
+}, {
+  "id" : 2,
+  "totalincome" : 500,
+  "totaltax" : 125,
+  "taxpaid" : 125,
+  "taxdue" : 0,
+  "taxpercent" : 25,
+  "fullname" : "Absamatov Iskender",
+  "status" : "PAID"
+}, {
+  "id" : 3,
+  "totalincome" : 120000,
+  "totaltax" : 14400,
+  "taxpaid" : 0,
+  "taxdue" : 14400,
+  "taxpercent" : 12,
+  "fullname" : "Albert Einstein",
+  "status" : "PARTIALLY PAID"
+} ]
