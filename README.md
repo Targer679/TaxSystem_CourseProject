@@ -87,11 +87,12 @@ viewActivityLog(): Displays full audit history
 
 This README
 
-Suggested Addition: JavaDoc comments for all methods
+Presentation
 
 8. Error Handling
 
 Try-catch blocks for file operations
+I/O 
 
 
 9. Authentication and User Roles:
@@ -105,17 +106,151 @@ Has different available function for admin and user
     provides efficient data export and import using .json files
 
 
-Data Structures
+Data Structures:
 
 Structure	Purpose	Location
 
-ArrayList	Store taxpayers/log entries	activityLog, taxpayers
+ArrayList:	Store taxpayers/log entries	activityLog, taxpayers
 
-HashMap	Count action frequencies	freq() method
+HashMap:	Count action frequencies	freq() method
 
 
 Key Methods:
-Method	Functionality
-logActivity()	Records actions with timestamps
-save()/read()	JSON serialization via ObjectMapper
-submitTax()	Processes payments + updates status
+Method	                Functionality
+logActivity()	          Records actions with timestamps
+save()/read()	          JSON serialization via ObjectMapper
+submitTax()  	          Processes payments + updates status
+adminMode()             Menu-driven CRUD operations with authorization
+freq()                  Analyzes action frequency
+viewActivityLog()       Displays all logged actions
+
+IMPLEMENTATION:
+
+example 1:
+THIS IS IRS TAX MANAGEMENT SYSTEM
+ARE YOU AN ADMIN?
+YES/NO
+yes
+ENTER A PASSWORD:
+4815162342
+YOU ARE SUCCESSFULLY LOGGED IN AS AN ADMIN
+WANT DO YOU WANT TO DO?
+ADD A TAXPAYER - 1
+GET AN INFORMAION OF A TAXPAYER - 2
+UPDATE AN INFORMATION OF A TAXPAYER - 3
+REMOVE A TAXPAYER - 4
+VIEW LOG ACTIVITY -5
+SHOW THE MOST FREQUENT OPERATION - 6
+3
+WHAT DO YOU WANT TO CHANGE?
+NAME - 1
+TOTAL YEARLY INCOME - 2
+TAX PERCENTAGE - 3
+SUBMIT TAXES - 4
+CHANGE ALL - 5
+2
+ENTER ID OF A TAXPAYER WHOSE PERSONAL INFO YOU WANT TO CHANGE:
+3
+ORIGINAL INFORMATION:
+Taxpayer ID: 3
+Taxpayer Name: Albert Einstein
+Taxpayer yearly Total Income: 120000$
+Taxpayer TaxPercent: 12%
+Taxpayer Total Tax: 14400$
+Taxpayer Taxpaid: 0$
+Taxpayer Taxdue: 14400$
+Taxpayer Status: PARTIALLY PAID
+ENTER UPDATED TOTAL INCOME:
+60000
+Taxpayer with ID 3 updated successfully.
+UPDATED INFORMATION:
+Taxpayer ID: 3
+Taxpayer Name: Albert Einstein
+Taxpayer yearly Total Income: 60000$
+Taxpayer TaxPercent: 12%
+Taxpayer Total Tax: 7200$
+Taxpayer Taxpaid: 0$
+Taxpayer Taxdue: 7200$
+Taxpayer Status: NOT PAID
+Taxpayer with ID 3 updated successfully.
+
+Process finished with exit code 0
+ 
+example 2:
+THIS IS IRS TAX MANAGEMENT SYSTEM
+ARE YOU AN ADMIN?
+YES/NO
+yes
+ENTER A PASSWORD:
+4815162342
+YOU ARE SUCCESSFULLY LOGGED IN AS AN ADMIN
+WANT DO YOU WANT TO DO?
+ADD A TAXPAYER - 1
+GET AN INFORMAION OF A TAXPAYER - 2
+UPDATE AN INFORMATION OF A TAXPAYER - 3
+REMOVE A TAXPAYER - 4
+VIEW LOG ACTIVITY -5
+SHOW THE MOST FREQUENT OPERATION - 6
+1
+Generated Taxpayer ID: 5
+ENTER FULL NAME:
+Michael Jackson
+ENTER TOTAL YEARLY INCOME:
+350000
+ENTER TAX  PERCENT:
+35
+ENTER PAID AMOUNT OF TAX:
+50000
+JSON file created successfully.
+Taxpayer added successfully!
+Added Info:
+Taxpayer ID: 5
+Taxpayer Name: Michael Jackson
+Taxpayer yearly Total Income: 350000$
+Taxpayer TaxPercent: 35%
+Taxpayer Total Tax: 122500$
+Taxpayer Taxpaid: 50000$
+Taxpayer Taxdue: 72500$
+Taxpayer Status: PARTIALLY PAID
+
+Process finished with exit code 0
+
+example 3:
+THIS IS IRS TAX MANAGEMENT SYSTEM
+ARE YOU AN ADMIN?
+YES/NO
+no
+YOU ARE IN A USER MODE ONLY VIEWING DATA AND TAX SUBMISSION IS ALLOWED
+WHAT DO YOU WANT TO DO?
+VIEW MY PERSONAL INFO - 1
+SUBMIT MY TAXES - 2
+2
+ENTER YOUR ID:
+5
+ORIGINAL INFORMATION:
+Taxpayer ID: 5
+Taxpayer Name: Michael Jackson
+Taxpayer yearly Total Income: 350000$
+Taxpayer TaxPercent: 35%
+Taxpayer Total Tax: 122500$
+Taxpayer Taxpaid: 50000$
+Taxpayer Taxdue: 72500$
+Taxpayer Status: PARTIALLY PAID
+ENTER AMOUNT OF USD YOU WANT TO SUBMIT:
+72500
+Taxpayer with ID 5 updated successfully.
+UPDATED INFORMATION:
+Taxpayer ID: 5
+Taxpayer Name: Michael Jackson
+Taxpayer yearly Total Income: 350000$
+Taxpayer TaxPercent: 35%
+Taxpayer Total Tax: 122500$
+Taxpayer Taxpaid: 122500$
+Taxpayer Taxdue: 0$
+Taxpayer Status: PAID
+Taxpayer with ID 5 updated successfully.
+
+Process finished with exit code 0
+
+
+
