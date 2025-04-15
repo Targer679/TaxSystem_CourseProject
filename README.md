@@ -1,5 +1,5 @@
 ﻿IRS Tax Management System
-Developed by: Osmonbaev Aibek EEAIR24
+Developed by: Osmonbaev Aibek EEAIR24 id:240106006
 
 1. Project Description
 A Java-based tax record management system featuring:
@@ -106,23 +106,66 @@ Has different available function for admin and user
     provides efficient data export and import using .json files
 
 
+Documentation:
+Algorithms:
+
+Tax Calculation Algorithm:
+Automatically computes
+Total tax owed (income × tax percentage)
+Tax due (total tax - amount paid)
+Payment status (Paid/Not Paid/Partially Paid/Overpaid)
+Runs whenever taxpayer data is created or updated
+
+
+Frequency Analysis Algorithm:
+Counts how often each system action occurs
+Uses a "count and compare" approach to find the most frequent actions
+Processes all logged activities to generate reports
+
+
+Search Algorithm:
+Finds taxpayers by scanning through records one by one
+Matches either by exact ID or partial name matches
+
 Data Structures:
+ArrayLists:
+Stores all taxpayer records in order
+Holds the complete activity log history
+Allows easy addition/removal of items
 
-Structure	Purpose	Location
+HashMaps:
+Used temporarily to count action frequencies
+Provides fast lookups when analyzing logs
 
-ArrayList:	Store taxpayers/log entries	activityLog, taxpayers
+LogEntry Objects:
+Special containers that hold:
+Action descriptions
+Timestamps
+User information
+Keeps all log details organized
 
-HashMap:	Count action frequencies	freq() method
+
+Key Functions/Modules:
+Taxpayer Management Module:
+Create/Read/Update/Delete taxpayer records
+Save and load from JSON files
+Display taxpayer information
+User Interface Module
+Admin menu system
+User access screens
+Input handling
 
 
-Key Methods:
-Method	                Functionality
-logActivity()	          Records actions with timestamps
-save()/read()	          JSON serialization via ObjectMapper
-submitTax()  	          Processes payments + updates status
-adminMode()             Menu-driven CRUD operations with authorization
-freq()                  Analyzes action frequency
-viewActivityLog()       Displays all logged actions
+Logging Module:
+Records all system activities
+Provides log viewing
+Generates frequency reports
+
+
+Calculation Module:
+Handles all tax math
+Updates payment statuses
+Verifies calculations
 
 IMPLEMENTATION:
 
@@ -251,6 +294,10 @@ Taxpayer Status: PAID
 Taxpayer with ID 5 updated successfully.
 
 Process finished with exit code 0
+
+Files used to store data in the project:
+taxpayers.json
+activity_log.json
 
 
 
