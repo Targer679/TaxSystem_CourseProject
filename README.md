@@ -24,6 +24,7 @@ Graceful Error Handling	✅ File I/O
 
 3. Project Requirements :
 
+  
   1. CRUD Operations:
 
 Create: adminMode() → Option 1 (Add taxpayer with auto-ID generation)
@@ -46,11 +47,13 @@ YOU ARE IN ADMIN MODE
 6. SHOW FREQUENT ACTIONS  
 
 
-3. Input Validation
+
+
+  3. Input Validation
 Validates taxpayer ID existence
 
 
-4. Data Persistence
+  4. Data Persistence
 
 taxpayers.json: Stores all taxpayer records
 
@@ -103,10 +106,15 @@ Has different available function for admin and user
 
 
 Data Structures
+
 Structure	Purpose	Location
+
 ArrayList	Store taxpayers/log entries	activityLog, taxpayers
+
 HashMap	Count action frequencies	freq() method
-Key Methods
+
+
+Key Methods:
 Method	Functionality
 logActivity()	Records actions with timestamps
 save()/read()	JSON serialization via ObjectMapper
