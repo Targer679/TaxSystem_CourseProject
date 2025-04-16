@@ -1,303 +1,210 @@
-﻿IRS Tax Management System
-Developed by: Osmonbaev Aibek EEAIR24 id:240106006
+﻿# IRS Tax Management System
 
-1. Project Description
-A Java-based tax record management system featuring:
+**Developed by:** Osmonbaev Aibek  
+**EEAIR24** | **ID: 240106006**
 
-Role-based access control (Admin/User modes with password protection)
+---
 
-Complete CRUD operations for taxpayer records
+## 📘 Project Description
 
-Automated tax calculations (totals, dues, payment status)
+A **Java-based tax record management system** with:
 
-Comprehensive activity logging with frequency analysis
+- Role-based access (Admin/User modes with password)
+- Full **CRUD** operations on taxpayer records
+- **Automated tax calculations** (total, dues, payment status)
+- Comprehensive **activity logging** with frequency analysis
+- Persistent **JSON storage** for data and logs
 
-Persistent JSON storage for both taxpayer data and audit logs
+---
 
-2. Objectives
-Objective	Implementation Status
-Create/Manage Taxpayer Records	✅ Fully Implemented
-Prevent Invalid Data Entry	✅ Automatic id generation 
-Ensure Data Persistence	✅ JSON Auto-Save/Load
-Generate Activity Reports	✅ freq() + viewActivityLog()
-Graceful Error Handling	✅ File I/O 
+## 🎯 Objectives
 
-3. Project Requirements :
+| Objective                     | Status                      |
+|------------------------------|-----------------------------|
+| Create/Manage Records         | ✅ Fully Implemented         |
+| Prevent Invalid Data Entry    | ✅ Auto ID Generation        |
+| Ensure Data Persistence       | ✅ JSON Auto-Save/Load       |
+| Generate Activity Reports     | ✅ `freq()` + `viewActivityLog()` |
+| Graceful Error Handling       | ✅ Try-Catch on I/O          |
 
-  
-  1. CRUD Operations:
+---
 
-Create: adminMode() → Option 1 (Add taxpayer with auto-ID generation)
+## ⚙️ Features
 
-Read: userMode() → View profile, adminMode() → Search taxpayer
+### 🔄 CRUD Operations
 
-Update: adminMode() → Option 3 (Modify income/tax/name)
+- **Create**: `adminMode()` → Option 1
+- **Read**: `userMode()` / `adminMode()` → Option 2
+- **Update**: `adminMode()` → Option 3
+- **Delete**: `adminMode()` → Option 4
 
-Delete: adminMode() → Option 4 (Remove by ID)
+### 🖥️ Command Line Interface (CLI)
 
-2. User-Friendly CLI
+```
+YOU ARE IN ADMIN MODE
 
-
-YOU ARE IN ADMIN MODE  
 1. ADD TAXPAYER  
 2. VIEW TAXPAYER  
 3. UPDATE TAXPAYER  
 4. DELETE TAXPAYER  
 5. VIEW ACTIVITY LOG  
 6. SHOW FREQUENT ACTIONS  
+```
 
+### 🧪 Input Validation
 
+- Verifies taxpayer ID exists
+- Prevents invalid formats
 
+### 💾 Persistent Data
 
-  3. Input Validation
-Validates taxpayer ID existence
+- `taxpayers.json`: Stores all taxpayer records
+- `activity_log.json`: Immutable audit trail with timestamps
 
+### 🧩 Modular Design
 
-  4. Data Persistence
-
-taxpayers.json: Stores all taxpayer records
-
-activity_log.json: Immutable audit trail with timestamps
-
-5. Modular Design
-
-mermaid
-Copy
+```
 classDiagram
-    class Taxpayer{
-        +id, income, tax...
+    class Taxpayer {
+        +id
+        +income
+        +tax
         +display()
     }
-    class LogEntry{
+
+    class LogEntry {
         -timestamp
         -action
         +toString()
     }
-    class Main{
+
+    class Main {
         +main()
     }
+```
 
-6. Report Generation
+### 📊 Report Generation
 
-freq(): Identifies top actions (e.g., "LOGIN_ATTEMPT: 12 occurrences")
+- `freq()`: Displays most frequent operations
+- `viewActivityLog()`: Full audit history
 
-viewActivityLog(): Displays full audit history
+### ⚠️ Error Handling
 
-7. Documentation
+- Try-catch blocks for file I/O and user input
 
-This README
+### 🔐 Authentication
 
-Presentation
+- Admin login with password
+- Role-based functionality:
+  - **Admin**: Full access
+  - **User**: View info + submit taxes
 
-8. Error Handling
+### 🔄 JSON Export/Import
 
-Try-catch blocks for file operations
-I/O 
+- Efficient `.json` data handling
 
+---
 
-9. Authentication and User Roles:
+## 🧠 Algorithms
 
-Includes basic authorization
+### 📈 Tax Calculation
 
-Has different available function for admin and user
+- `totalTax = income × taxPercent`
+- `taxDue = totalTax - taxPaid`
+- Status: **PAID**, **PARTIALLY PAID**, **NOT PAID**, **OVERPAID**
 
-10. Project supports Data Export and Import
+### 📊 Frequency Analysis
 
-    provides efficient data export and import using .json files
+- Uses HashMap to count system actions
+- Identifies top-used commands
 
+### 🔍 Search
 
-Documentation:
-Algorithms:
+- Searches by ID or partial name match
 
-Tax Calculation Algorithm:
-Automatically computes
-Total tax owed (income × tax percentage)
-Tax due (total tax - amount paid)
-Payment status (Paid/Not Paid/Partially Paid/Overpaid)
-Runs whenever taxpayer data is created or updated
+---
 
+## 💾 Data Structures
 
-Frequency Analysis Algorithm:
-Counts how often each system action occurs
-Uses a "count and compare" approach to find the most frequent actions
-Processes all logged activities to generate reports
+- **ArrayList**: For taxpayer records and log entries
+- **HashMap**: For log frequency analysis
+- **LogEntry**: Stores action + timestamp + user info
 
+---
 
-Search Algorithm:
-Finds taxpayers by scanning through records one by one
-Matches either by exact ID or partial name matches
+## 🧩 Modules Overview
 
-Data Structures:
-ArrayLists:
-Stores all taxpayer records in order
-Holds the complete activity log history
-Allows easy addition/removal of items
+| Module                | Description                                    |
+|-----------------------|------------------------------------------------|
+| Taxpayer Management   | CRUD, file I/O, display                        |
+| UI Module             | Admin/User CLI navigation                     |
+| Logging Module        | Tracks activity + generates frequency reports |
+| Calculation Module    | Tax math + payment status update              |
 
-HashMaps:
-Used temporarily to count action frequencies
-Provides fast lookups when analyzing logs
+---
 
-LogEntry Objects:
-Special containers that hold:
-Action descriptions
-Timestamps
-User information
-Keeps all log details organized
+## 🔍 Example Use Cases
 
+### 🧪 Update Taxpayer (Admin)
 
-Key Functions/Modules:
-Taxpayer Management Module:
-Create/Read/Update/Delete taxpayer records
-Save and load from JSON files
-Display taxpayer information
-User Interface Module
-Admin menu system
-User access screens
-Input handling
+```
+→ UPDATE A TAXPAYER - 3  
+→ CHANGE TOTAL INCOME - 2  
+ID: 3  
+Income: 120000 → 60000  
+Tax: 12% → Total: $7200  
+→ Status: NOT PAID
+```
 
+---
 
-Logging Module:
-Records all system activities
-Provides log viewing
-Generates frequency reports
+### 🧪 Add Taxpayer (Admin)
 
+```
+→ ADD A TAXPAYER - 1  
+ID: 5  
+Name: Michael Jackson  
+Income: 350000 | Tax %: 35 | Paid: 50000  
+→ Status: PARTIALLY PAID
+```
 
-Calculation Module:
-Handles all tax math
-Updates payment statuses
-Verifies calculations
+---
 
-IMPLEMENTATION:
+### 🧪 Submit Tax (User)
 
-example 1:
-THIS IS IRS TAX MANAGEMENT SYSTEM
-ARE YOU AN ADMIN?
-YES/NO
-yes
-ENTER A PASSWORD:
-4815162342
-YOU ARE SUCCESSFULLY LOGGED IN AS AN ADMIN
-WANT DO YOU WANT TO DO?
-ADD A TAXPAYER - 1
-GET AN INFORMAION OF A TAXPAYER - 2
-UPDATE AN INFORMATION OF A TAXPAYER - 3
-REMOVE A TAXPAYER - 4
-VIEW LOG ACTIVITY -5
-SHOW THE MOST FREQUENT OPERATION - 6
-3
-WHAT DO YOU WANT TO CHANGE?
-NAME - 1
-TOTAL YEARLY INCOME - 2
-TAX PERCENTAGE - 3
-SUBMIT TAXES - 4
-CHANGE ALL - 5
-2
-ENTER ID OF A TAXPAYER WHOSE PERSONAL INFO YOU WANT TO CHANGE:
-3
-ORIGINAL INFORMATION:
-Taxpayer ID: 3
-Taxpayer Name: Albert Einstein
-Taxpayer yearly Total Income: 120000$
-Taxpayer TaxPercent: 12%
-Taxpayer Total Tax: 14400$
-Taxpayer Taxpaid: 0$
-Taxpayer Taxdue: 14400$
-Taxpayer Status: PARTIALLY PAID
-ENTER UPDATED TOTAL INCOME:
-60000
-Taxpayer with ID 3 updated successfully.
-UPDATED INFORMATION:
-Taxpayer ID: 3
-Taxpayer Name: Albert Einstein
-Taxpayer yearly Total Income: 60000$
-Taxpayer TaxPercent: 12%
-Taxpayer Total Tax: 7200$
-Taxpayer Taxpaid: 0$
-Taxpayer Taxdue: 7200$
-Taxpayer Status: NOT PAID
-Taxpayer with ID 3 updated successfully.
+```
+→ USER MODE  
+→ SUBMIT MY TAXES - 2  
+ID: 5  
+Submit: 72500  
+→ Status: PAID
+```
 
-Process finished with exit code 0
- 
-example 2:
-THIS IS IRS TAX MANAGEMENT SYSTEM
-ARE YOU AN ADMIN?
-YES/NO
-yes
-ENTER A PASSWORD:
-4815162342
-YOU ARE SUCCESSFULLY LOGGED IN AS AN ADMIN
-WANT DO YOU WANT TO DO?
-ADD A TAXPAYER - 1
-GET AN INFORMAION OF A TAXPAYER - 2
-UPDATE AN INFORMATION OF A TAXPAYER - 3
-REMOVE A TAXPAYER - 4
-VIEW LOG ACTIVITY -5
-SHOW THE MOST FREQUENT OPERATION - 6
-1
-Generated Taxpayer ID: 5
-ENTER FULL NAME:
-Michael Jackson
-ENTER TOTAL YEARLY INCOME:
-350000
-ENTER TAX  PERCENT:
-35
-ENTER PAID AMOUNT OF TAX:
-50000
-JSON file created successfully.
-Taxpayer added successfully!
-Added Info:
-Taxpayer ID: 5
-Taxpayer Name: Michael Jackson
-Taxpayer yearly Total Income: 350000$
-Taxpayer TaxPercent: 35%
-Taxpayer Total Tax: 122500$
-Taxpayer Taxpaid: 50000$
-Taxpayer Taxdue: 72500$
-Taxpayer Status: PARTIALLY PAID
+---
 
-Process finished with exit code 0
+## 📁 Files Used
 
-example 3:
-THIS IS IRS TAX MANAGEMENT SYSTEM
-ARE YOU AN ADMIN?
-YES/NO
-no
-YOU ARE IN A USER MODE ONLY VIEWING DATA AND TAX SUBMISSION IS ALLOWED
-WHAT DO YOU WANT TO DO?
-VIEW MY PERSONAL INFO - 1
-SUBMIT MY TAXES - 2
-2
-ENTER YOUR ID:
-5
-ORIGINAL INFORMATION:
-Taxpayer ID: 5
-Taxpayer Name: Michael Jackson
-Taxpayer yearly Total Income: 350000$
-Taxpayer TaxPercent: 35%
-Taxpayer Total Tax: 122500$
-Taxpayer Taxpaid: 50000$
-Taxpayer Taxdue: 72500$
-Taxpayer Status: PARTIALLY PAID
-ENTER AMOUNT OF USD YOU WANT TO SUBMIT:
-72500
-Taxpayer with ID 5 updated successfully.
-UPDATED INFORMATION:
-Taxpayer ID: 5
-Taxpayer Name: Michael Jackson
-Taxpayer yearly Total Income: 350000$
-Taxpayer TaxPercent: 35%
-Taxpayer Total Tax: 122500$
-Taxpayer Taxpaid: 122500$
-Taxpayer Taxdue: 0$
-Taxpayer Status: PAID
-Taxpayer with ID 5 updated successfully.
+- `taxpayers.json` — All taxpayer records  
+- `activity_log.json` — Action logs with timestamps  
 
-Process finished with exit code 0
+---
 
-Files used to store data in the project:
-taxpayers.json
-activity_log.json
+## ✅ Run Instructions
 
+1. Compile the project in your IDE (e.g., IntelliJ, Eclipse)
+2. Run `Main.java`
+3. Interact via CLI:
+   - Choose **Admin** or **User** mode
+   - Follow on-screen options
 
+---
 
+## 📌 Notes
+
+- Ensure both JSON files are in the same directory as the program
+- Preloaded passwords (e.g., `4815162342`) can be modified in code
+
+---
+
+Feel free to fork, contribute, or suggest improvements!  
+📬 For questions, contact: [your-email@example.com]
